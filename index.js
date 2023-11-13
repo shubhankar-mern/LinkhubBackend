@@ -19,11 +19,10 @@ app.use(cookieParser());
 
 
 
-app.use(
-    cors({ origin: '*' ,
-methods:"GET,POST,PUT,DELETE,PATCH",
-credentials:true})
-)
+app.use(cors())
+// { origin: '*' ,
+// methods:"GET,POST,PUT,DELETE,PATCH",
+// credentials:true}
 app.get('/a1/b1/:linkId',(req,res)=>{
     let linkId = req.params.linkId;
     res.redirect(`http://localhost:3000/Linkhub/screen/${linkId}`)
