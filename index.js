@@ -33,7 +33,7 @@ const corsOptions = {
 // credentials:true} 178.16.138.73
 app.get('/a1/b1/:linkId',(req,res)=>{
     let linkId = req.params.linkId;
-   res.redirect(`http://178.16.138.73:3000/Linkhub/screen/${linkId}`);
+   res.redirect(200,`http://178.16.138.73:3000/Linkhub/screen/${linkId}`);
    
 });
 
