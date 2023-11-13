@@ -19,7 +19,9 @@ app.use(cookieParser());
 
 
 
-app.use(cors())
+app.options("*", cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
+
+app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
 // { origin: '*' ,
 // methods:"GET,POST,PUT,DELETE,PATCH",
 // credentials:true}
