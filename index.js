@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import express from 'express';
 import httpProxy from 'http-proxy';
 const proxy = httpProxy.createServer({});
+import path from 'path';
 import knex from 'knex';
 import cors from 'cors';
 const app = express();
@@ -31,9 +32,13 @@ const corsOptions = {
 // { origin: '*' ,
 // methods:"GET,POST,PUT,DELETE,PATCH",
 // credentials:true} 178.16.138.73
+// Serve the main HTML file for all routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../LinkhubFrontend/build/index.html'));
+  });
 app.get('/a1/b1/:linkId',(req,res)=>{
     let linkId = req.params.linkId;
-   res.redirect(200,`http://178.16.138.73:3000/Linkhub/screen/${linkId}`);
+   res.redirect(`http://178.16.138.73:3000/Linkhub/screen/${linkId}`);
    
 });
 
