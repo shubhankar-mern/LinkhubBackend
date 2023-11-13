@@ -28,19 +28,14 @@ jobs:
         npm install
 
     - name: Deploy to VPS
-      run: |
-        echo "Current Directory: $(pwd)"
-        ls -la  # List files in the current directory for debugging
-        echo "Copying files to VPS..."
-        scp -r -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} "LinkhubBackend/*" ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/root/workplace/LinkhubBackend
-      # uses: appleboy/scp-action@master
-      # with:
-      #   host: ${{ secrets.HOST }}
-      #   username: ${{ secrets.USERNAME }}
-      #   password: ${{ secrets.PASSWORD }}
-      #   port: ${{ secrets.PORT }}
-      #   source: "LinkhubBackend/*"
-      #   target: "LinkhubBackend"
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "LinkhubBackend/*"
+        target: "LinkhubBackend"
     - name: Print Current Directory
       run: |
           echo "Current Directory in VPS: $(pwd)"    
