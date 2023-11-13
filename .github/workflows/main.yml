@@ -31,10 +31,9 @@ jobs:
         cp -TR . ../build
         tar -cvf deploy.tar ../build/
 
-        
     - name: Delete existing LinkhubBackend on VPS
       run: |
-        sshpass -p ${{ secrets.PASSWORD }} ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'rm -r /root/workplace/LinkhubBackend'    
+        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'rm -r /root/workplace/LinkhubBackend'    
     
     - name: Deploy to VPS
       uses: appleboy/scp-action@master
@@ -48,4 +47,14 @@ jobs:
     - name: Extract files on VPS
       run: |
         sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && tar -xvf deploy.tar && rm deploy.tar && mv build/* . && rm -r build'           
-    
+    - name: Stop existing pm2 process
+      run: |
+        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'pm2 stop backend'
+  
+    - name: Build and Serve Nodejs Backend App
+      run: |
+        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && npm install && pm2 start npm -- run dev -- --port 5000'    
+
+    - name: Save pm2 processes
+      run: |
+        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'pm2 save'
