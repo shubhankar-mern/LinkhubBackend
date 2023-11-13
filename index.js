@@ -33,9 +33,9 @@ const corsOptions = {
 // methods:"GET,POST,PUT,DELETE,PATCH",
 // credentials:true} 178.16.138.73
 // Serve the main HTML file for all routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../LinkhubFrontend/build/index.html'));
-  });
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../LinkhubFrontend/build/index.html'));
+//   });
 app.get('/a1/b1/:linkId',(req,res)=>{
     let linkId = req.params.linkId;
    res.redirect(`http://178.16.138.73:3000/Linkhub/screen/${linkId}`);
