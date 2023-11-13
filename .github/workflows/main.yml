@@ -34,8 +34,11 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        source: "LinkhubBackend"
+        source: "LinkhubBackend/*"
         target: "LinkhubBackend"
+    - name: Print Current Directory
+      run: |
+          echo "Current Directory in VPS: $(pwd)"    
     - name: Install sshpass
       run: |
           sudo apt-get update
