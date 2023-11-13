@@ -38,18 +38,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: "deploy.tar"
-        target: "/root/workspace/LinkhubBackend/"
-        script: |
-          cd /root/workplace/LinkhubBackend
-          npm install
-          pm2 restart backend
-    # - name: Print Current Directory
-    #   run: |
-    #       echo "Current Directory in VPS: $(pwd)"    
-    # - name: Install sshpass
-    #   run: |
-    #       sudo apt-get update
-    #       sudo apt-get install -y sshpass    
-    # - name: Execute Commands on VPS
-    #   run: |
-    #    sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && npm install && pm2 restart backend'    
+        target: "/root/workspace/LinkhubBackend/"       
+    - name: Execute Commands on VPS
+      run: |
+       sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && npm install && pm2 restart backend'    
