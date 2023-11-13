@@ -31,6 +31,7 @@ jobs:
         cp -TR . ../build
         tar -cvf deploy.tar ../build/
 
+        
     - name: Delete existing LinkhubBackend on VPS
       run: |
         sshpass -p ${{ secrets.PASSWORD }} ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'rm -r /root/workplace/LinkhubBackend'    
