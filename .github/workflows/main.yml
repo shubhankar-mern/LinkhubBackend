@@ -34,8 +34,8 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        source: "LinkhubBackend"
-        target: "/root/workplace/"
+        source: "LinkhubBackend/*"
+        target: "/root/workplace/LinkhubBackend"
     - name: Install sshpass
       run: |
           sudo apt-get update
