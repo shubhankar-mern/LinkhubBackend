@@ -41,8 +41,5 @@ jobs:
         target: "/root/workplace/LinkhubBackend/"
     - name: Extract files on VPS
       run: |
-        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && tar -xvf deploy.tar &&
-        rm deploy.tar &&
-        mv build/* . &&
-        rm -r build'           
+        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && tar -xvf deploy.tar && rm deploy.tar && mv build/* . && rm -r build'           
     
