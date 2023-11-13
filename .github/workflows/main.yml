@@ -53,7 +53,9 @@ jobs:
   
     - name: Build and Serve Nodejs Backend App
       run: |
-        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && npm install && npm run dev'    
+        sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /root/workplace/LinkhubBackend && npm install && pm2 start index.js --name backend -- --port 3000
+        '    
+
 
     - name: Save pm2 processes
       run: |
