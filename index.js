@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import { config } from 'dotenv';
 import express from 'express';
-import {createProxyMiddleware} from 'http-proxy-middleware';
+import httpProxy from 'http-proxy';
+const proxy = httpProxy.createServer({});
 import knex from 'knex';
 import cors from 'cors';
 const app = express();
@@ -29,10 +30,11 @@ const corsOptions = {
   app.use(cors(corsOptions));
 // { origin: '*' ,
 // methods:"GET,POST,PUT,DELETE,PATCH",
-// credentials:true}
+// credentials:true} 178.16.138.73
 app.get('/a1/b1/:linkId',(req,res)=>{
     let linkId = req.params.linkId;
-    res.redirect(`http://178.16.138.73:3000/Linkhub/screen/${linkId}`)
+   // res.redirect(`http://localhost:3000/Linkhub/screen/${linkId}`);
+    proxy.web(req, res, { target: `http://localhost:3000/Linkhub/screen/${linkId}` });
 });
 
 
