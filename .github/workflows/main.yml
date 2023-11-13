@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Print Secrets
+      run: |
+        echo "HOST: ${{ secrets.HOST }}"
+        echo "USERNAME: ${{ secrets.USERNAME }}"
+        echo "PASSWORD: ${{ secrets.PASSWORD }}"
+        echo "PORT: ${{ secrets.PORT }}"  
     - name: Checkout Repository
       uses: actions/checkout@v2
 
