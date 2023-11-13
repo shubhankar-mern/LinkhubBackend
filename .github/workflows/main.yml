@@ -25,7 +25,11 @@ jobs:
         pwd
         ls
         npm install
-
+    - name: Run a multi-line script
+      run: |
+        mkdir ../build
+        cp -TR . ../build
+        tar -cvf deploy.tar ../build/
     - name: Deploy to VPS
       uses: appleboy/scp-action@master
       with:
@@ -33,8 +37,8 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        source: "LinkhubBackend/*"
-        target: "LinkhubBackend"
+        source: "deploy.tar"
+        target: "/root/workspace/LinkhubBackend/"
     - name: Print Current Directory
       run: |
           echo "Current Directory in VPS: $(pwd)"    
