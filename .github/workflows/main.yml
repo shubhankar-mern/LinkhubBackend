@@ -19,7 +19,6 @@ jobs:
       run: |
         pwd
         ls
-        cd LinkhubBackend
         npm install
 
     - name: Deploy to VPS
