@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-    origin: '*',
+    origin: ['http://178.16.138.73:3000', 'http://178.16.138.73:5000'],
     optionsSuccessStatus: 200,
   };
   
